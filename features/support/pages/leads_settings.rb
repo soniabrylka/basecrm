@@ -4,12 +4,10 @@ class LeadsSettings
   include PageObject
   include SettingsMenu
 
-  #TODO-opinion Both work. Which one is better and WHY? (link may change (maybe), but text is visible to user, probably will be left.)
-  #link(:goto_lead_statuses, :href => '#lead-status')
   link(:goto_lead_statuses, :text => 'Lead Statuses')
 
   #TODO-opinion I do not like this, This is against DRY (what if there were 1000 Edits ?). Try using the Lead name
-  #button(:edit_first_lead_status, :text => 'Edit', :index => 1) #This does not work
+  #button(:edit_first_lead_status_name, :text => 'Edit', :index => 1) #This does not work
   # This button ate me some time. Watir looks for the first element. The first button exists, but is not visible! THE Etit is the second one.....gooosh.
   button(:edit_lead_status_name, :class => 'btn btn-mini edit', :index => 1)
   button(:save_lead_status_name, :class => 'btn btn-primary save', :index => 2)

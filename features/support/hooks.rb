@@ -10,14 +10,13 @@ Before do
 end
 
 After do
-  puts 'cleaning cleaning cleaning '
-
-  if $lead_status_changed_flag == 1
+  if $leadstatus_cleaning_required == 1
+    puts 'Cleaning after test performed......'
     on_page(LeadsPage).open_settings
     on_page(LeadsSettings).wait_for_setting
     on_page(LeadsSettings).goto_leads_settings
     on_page(LeadsSettings).change_lead_status_fromto($name_changed_to, $name_changed_from)
-    $lead_status_changed_flag = 0
+    $leadstatus_cleaning_required = 0
   end
   #@browser.close
 end

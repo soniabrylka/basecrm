@@ -4,7 +4,7 @@ class LoginPage
   include PageObject
   include TopMenu
 
-  #TODO-Q How I may protect the logging data? Should I ?
+  #TODO-Q Should I encrypt those data? Now I share my email on git :/
   DEFAULT_DATA = {
       'user_email' => 'niedorzecznyadres@gmail.com',
       'password' => 'getbase01%'

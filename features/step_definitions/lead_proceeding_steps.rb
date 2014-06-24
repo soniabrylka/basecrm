@@ -8,49 +8,51 @@ When(/^I Log into the Web version of Base$/) do
 end
 
 And(/^Create a new Lead$/) do
-  #TODO-Q Is is better to merge those two steps? Each time to add a Lead I have to go to the Leads page. But How I may ensure page is loaded ?
   on_page(LeadsPage).goto_leads
-  @current_page.wait_for_loading_elements
-  @current_page.skip_intro
+  @current_page.skip_intro #This is needed since while using Watir, the SCORE intro is shown
+  @current_page.wait_for_add_lead
   @current_page.add_random_lead
 end
 
 Then(/^Lead status is "(.*?)"$/) do |lead_status|
-  #TODO-sonia Replace this when you get to know the good wait. Include in the LeadsPage
-  sleep 6
+  on_page(LeadsPage).wait_for_leadstatus
   fail 'Lead status is not '+lead_status.to_s unless on_page(LeadsPage).lead_status_on_page.include? lead_status.to_s
-  #This was the first version. I had some problem with nested element in PageObject get working
-  #@browser.div(:class => 'status').span(:class => 'lead-status').text.should include lead_status
 end
 
-When(/^I change the name of the "(.*?)" status to "(.*?)"$/) do |arg1, arg2|
-  $lead_status_changed_flag = 0
+When(/^I change the name of the "(.*?)" status to "(.*?)"$/) do |old_leadstatus_name, new_leadstatus_name|
   on_page(LeadsPage).open_settings
   on_page(LeadsSettings).wait_for_setting
   on_page(LeadsSettings).goto_leads_settings
-  on_page(LeadsSettings).change_lead_status_fromto(arg1, arg2)
-  $lead_status_changed_flag = 1
-  #puts @browser.text_field(:value => 'New2', :id => 'name').visible?
-  #@browser.text_field(:value => 'New2', :id => 'name').set('ala ma kooota ooota oota')
+  on_page(LeadsSettings).change_lead_status_fromto(old_leadstatus_name, new_leadstatus_name)
+  $lead_status_changed_flag = 1 #flag changed not in the method, cause it depends on whether change is to or from New
 
-  #@browser.text_field(:value => 'New2', :id => 'name').set('New2')
-
-  #needed for cleaning. Is it OK or better is to put the step with explicit names. Would not it be too much do to ..?
-  $name_changed_from = arg1
-  $name_changed_to = arg2
+  # variables used instead of explicit names, since now it is easier to maintain (does not require maintain)
+  # ??---> is it better to put both statuses to the test_data.rb, so that they may be used everywhere if needed?
+  $name_changed_from = old_leadstatus_name
+  $name_changed_to = new_leadstatus_name
 end
 
+#TODO-Q Is it a good idea make this step more a wildcard? (/^"(.*?)" leadstatus is changed from "(.*?)" to "(.*?)"$/)  ?
 Then(/^Created lead status name is changed$/) do
   on_page(LeadsPage).goto_leads
-  @current_page.wait_for_loading_elements
   @current_page.skip_intro
-  puts 'intro skipped'
+  # When there is no intro (second click to Lead) then there is no sleep. It makes sometimes the LeadsPage is not fully loaded.
+  #TODO-Q How to ensure the page is loaded without a sleep? What check do ou recommend? (sonia, consider filtering! You only search for lead, no need to wait for all)
+  sleep 4
   @current_page.open_lead
-  puts 'below name changed to:'
-  puts $name_changed_to
-  fail 'Gosh, apparently the lead status name is not the one you changed to.... 'unless on_page(LeadsPage).lead_status_on_page.include? $name_changed_to
-  #TODO-opinion If the test fails as now (status have been changed but with no result), cleaning is needed but will not be performed since test will fail above
-  $lead_status_changed_flag = 1
+
+  begin
+    fail unless on_page(LeadsPage).lead_status_on_page.include? $name_changed_to
+  rescue => e
+    puts e
+    puts 'Gosh, apparently the lead status name is not the one you changed to.... '
+    # How to make cuke cleans - how to invoke 'After' from hooks ? I do not like below cleaning.
+    on_page(LeadsPage).open_settings
+    on_page(LeadsSettings).wait_for_setting
+    on_page(LeadsSettings).goto_leads_settings
+    on_page(LeadsSettings).change_lead_status_fromto($name_changed_to, $name_changed_from)
+    $leadstatus_cleaning_required = 0
+  end
 end
 
 And(/^The clean I make$/) do

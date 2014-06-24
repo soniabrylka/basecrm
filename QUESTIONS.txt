@@ -1,8 +1,11 @@
----------------------------------------------------
 
-Shouldn't the step:
-  When I Log into the Web version of Base
-be included in the Background ? Almost all scenarios require logging in (until a loginpage is not checked)
+
+How to handle fails ? (I mean nicelely put messages and allow cuke to do AFTER for us)
+Now the test fails and cleanup is not performed (RuntimeError)
+
+  fail 'Gosh, apparently the lead status name is not the one you changed to.... 'unless on_page(LeadsPage).lead_status_on_page.include? $name_changed_to
+  #The test fails now (status is changed but with no result until relog), cleaning is needed but will not be performed since test fails with RuntimeError:
+  # Maybe I should put some if fails then puts  ? But we never know where test will fail, this is a special case here..
 
 ---------------------------------------------------
 
@@ -25,17 +28,42 @@ WAITING for elements and page to load:
     #Watir::Wait.until { username_element.exists? && password_element.exists? && submitlogin_element.exists } <--- no method error
     #username_element.wait_until_present < ----- Deprecated method
 
----------------------------------------------------
+( I do have lots of waiting, but otherwise I was getting: unable to locate the element)
 
 
 ---------------------------------------------------
 
+Cleanup - whenever est fails for some reason, cleanup is not done.
+Should I put cleanup at the beginnng, and check the leadstatus ? If not New then change to New before test.
+Isn't this being toooo careful ? In case everything goess well this would produce too much ,waste'
+
+In such attitude we can check eeeveeeryyything before every scenario.
 
 
 ---------------------------------------------------
 
 
+  Both work. Which one is better and WHY? (link may change (maybe), but text is visible to user, probably will be left.)
+  #link(:goto_lead_statuses, :href => '#lead-status')
+  link(:goto_lead_statuses, :text => 'Lead Statuses')
+
 ---------------------------------------------------
 
+  LeadsPage - waiting for the content.  HOW ?
+  When I had lots of leads, they were loaded while scrolling. What about ,,last'' leads ?
+  Should I scroll down to ensure I do have all leads on the page visible ? Or maybe using filter instead ?!
+
+---------------------------------------------------
+
+  fail 'Gosh, apparently the lead status name is not the one you changed to.... 'unless on_page(LeadsPage).lead_status_on_page.include? $name_changed_to
+  The test fails now (status is changed but with no result until relog), cleaning is needed but will not be performed since test fails with RuntimeError:
+
+---------------------------------------------------
+
+---------------------------------------------------
+
+Shouldn't the step:
+  When I Log into the Web version of Base
+be included in the Background ? Almost all scenarios require logging in (until a loginpage is not checked)
 
 ---------------------------------------------------
