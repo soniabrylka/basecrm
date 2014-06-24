@@ -1,0 +1,98 @@
+<div id="reports-loader" class="modal" tabindex="-1" style="">
+  <div class="modal-header">
+    <h3 class="modal-title">Super Title</h3>
+  </div>
+  <div class="modal-body">
+    <iframe src="//some_source" width="640" height="360" frameborder="0" webkitallowfullscreen="" mozallowfullscreen="" allowfullscreen="">
+    </iframe>
+    <div id="reports-loader-skip-intro">
+        <a href="#" data-dismiss="modal" class="btn btn-large welcome-button skip gray" style="display: inline-block; width: 33%">Skip</a>
+        <a href="#" data-dismiss="modal" class="btn btn-large welcome-button skip try-now-redirect" style="display: inline-block; width: 66%">Try Feature</a>
+    </div>
+  </div>
+</div>
+<div id="reports-backdrop"></div>
+
+-----------------
+
+<div class="status">
+  <div class="dropdown">
+    <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+      <span class="lead-status">New</span>
+      <b class="caret"></b>
+      <span class="info-label">status</span>
+
+      ------------------------
+
+<ul id="nav-right" class="nav pull-right">
+<li class="secondary-item">
+<li id="premium-bar" class="secondary-item hide">
+<li id="notifications-widget" class="dropdown notifications"> </li>
+
+<li id="user-dd" class="dropdown open">
+  <a class="dropdown-toggle" href="#user-dd" data-toggle="dropdown">
+    <i class="icon-cogs"></i>
+  </a>
+  <ul class="topbar-settings-dropdown dropdown-menu">
+    <li class="user-name"> Sonia Brylka </li>
+    <li class="divider"></li>
+    <li class="settings">
+      <a href="/settings/profile">
+        <i class="icon-cog"></i>
+        <strong>Settings</strong>
+
+---------------------
+
+<div data-named-object-id="1078953" class="control-group item">
+  <label class="control-label">
+    <h4>New</h4>
+  </label>
+  <div class="controls">
+    <div class="btn-toolbar">
+      <button href="#" class="btn btn-mini edit">Edit</button>
+      <span class="sort">
+      </span>
+    </div>
+  </div>
+</div>
+
+
+
+<div class="control-group item" data-named-object-id="1078953">
+<label class="control-label">
+<h4>New2</h4>
+</label>
+<div class="controls">
+<div class="btn-toolbar">
+<button class="btn btn-mini edit" href="#">Edit</button>
+
+
+--------------------
+
+<form>
+    <fieldset>
+      <div class="control-group">
+        <div class="controls">
+          <h4>Edit Lead Status</h4>
+        </div>
+      </div>
+
+      <div for="name" class="control-group">
+        <label for="name" class="control-label">Name</label>
+        <div class="controls">
+          <input type="text" value="New2" name="name" id="name" class="input-xlarge">
+          <span class="help-inline error-box"></span>
+        </div>
+      </div>
+
+      <div class="control-group">
+        <div class="controls">
+          <button href="#" class="btn btn-primary save">Save</button>
+          <a class="cancel-link cancel" href="#">Cancel</a>
+        </div>
+      </div>
+    </fieldset>
+  </form>
+
+
+  https://core.futuresimple.com/sales/users/login

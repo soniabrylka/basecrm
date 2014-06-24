@@ -1,0 +1,41 @@
+---------------------------------------------------
+
+Shouldn't the step:
+  When I Log into the Web version of Base
+be included in the Background ? Almost all scenarios require logging in (until a loginpage is not checked)
+
+---------------------------------------------------
+
+Below:
+ visit_page(LoginPage)
+ @current_page.wait_for_loading_elements
+where and why it is better to use @current_page, and where I should write the page explicitly ?
+
+???{
+    I think this may depend on the step and what it is doing. @current_page can make a step definition reusable.
+    If we clicked some buttons on page having the same buttons everywhere, then only page we visit changes.
+
+    From the other side when using @current_page we should assure that we are on the page we want - so step can be used only after visiting
+    the correct side. We have to assure this.
+}
+
+---------------------------------------------------
+
+WAITING for elements and page to load:
+    #Watir::Wait.until { username_element.exists? && password_element.exists? && submitlogin_element.exists } <--- no method error
+    #username_element.wait_until_present < ----- Deprecated method
+
+---------------------------------------------------
+
+
+---------------------------------------------------
+
+
+
+---------------------------------------------------
+
+
+---------------------------------------------------
+
+
+---------------------------------------------------

@@ -1,0 +1,20 @@
+[0.000][INFO]:      ChromeDriver 26.0.1383.0 C:\selenium\chromedriver.exe
+[0.511][FINE]:      Initializing session with capabilities {
+   "browserName": "chrome",
+   "chrome.detach": true,
+   "chromeOptions": {
+      "detach": true
+   },
+   "cssSelectorsEnabled": true,
+   "javascriptEnabled": true,
+   "nativeEvents": false,
+   "platform": "ANY",
+   "rotatable": false,
+   "takesScreenshot": false,
+   "version": ""
+}
+
+[0.511][INFO]:      Using named testing interface
+[0.764][INFO]:      Connected to Chrome successfully. Version: 35.0.1916.153
+[10.809][WARNING]:  Chrome still running, terminating...
+[10.809][INFO]:     Chrome shutdown
