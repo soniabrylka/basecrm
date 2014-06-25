@@ -33,11 +33,13 @@ WAITING for elements and page to load:
 
 ---------------------------------------------------
 
-Cleanup - whenever est fails for some reason, cleanup is not done.
+Cleanup - whenever test fails for some reason, cleanup is not done.
+Something is happenng tith my global var flag (is zero at the end).
+
 Should I put cleanup at the beginnng, and check the leadstatus ? If not New then change to New before test.
 Isn't this being toooo careful ? In case everything goess well this would produce too much ,waste'
 
-In such attitude we can check eeeveeeryyything before every scenario.
+With such attitude we could check eeeveeeryyything before every scenario, what is more than crazy...
 
 
 ---------------------------------------------------
@@ -52,13 +54,10 @@ In such attitude we can check eeeveeeryyything before every scenario.
   LeadsPage - waiting for the content.  HOW ?
   When I had lots of leads, they were loaded while scrolling. What about ,,last'' leads ?
   Should I scroll down to ensure I do have all leads on the page visible ? Or maybe using filter instead ?!
+  ---> sonia, maybe filter. TO DO: check how leads is loading while having lots of leads.
 
 ---------------------------------------------------
 
-  fail 'Gosh, apparently the lead status name is not the one you changed to.... 'unless on_page(LeadsPage).lead_status_on_page.include? $name_changed_to
-  The test fails now (status is changed but with no result until relog), cleaning is needed but will not be performed since test fails with RuntimeError:
-
----------------------------------------------------
 
 ---------------------------------------------------
 

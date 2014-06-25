@@ -4,7 +4,7 @@ class LoginPage
   include PageObject
   include TopMenu
 
-  #TODO-Q Should I encrypt those data? Now I share my email on git :/
+  #TODO-Q How to nicely encrypt those data? Now I share my email on git :/
   DEFAULT_DATA = {
       'user_email' => 'niedorzecznyadres@gmail.com',
       'password' => 'getbase01%'

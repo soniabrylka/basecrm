@@ -13,12 +13,10 @@ require_relative '../test_data'
 
   button(:save, :text => 'Save')
 
-  #TODO-opinion There is so much of lead status! Variable passed, span class= , name of the element ....how not to get confused ?
   span(:lead_status_on_page){ div_element(:class => 'status').span_element }
 
   #TODO-opinion Not adding the default data - a new lead will be added each time, instead of adding one and remove after test
   def add_random_lead
-    #generate_random_data
     self.add_new_lead
     self.lead_first_name = $new_lead_name
     self.lead_last_name = $new_lead_surname
@@ -37,15 +35,12 @@ require_relative '../test_data'
       # Element is not clickable at point (101, 115).
       # Other element would receive the click: <div id="reports-backdrop" style="opacity: 0.31274270810161253;"></div>
     else
-      puts 'Great, no popup !'
-      sleep 3 #to gie LeadsPage a chance to load all data. The worse way to do this, I know...
+      wait_until{ add_new_lead_element.visible? }
     end
   end
 
-  def open_lead#(leadname, leadsurname)
-    puts ' below lead name'
-    puts $new_lead_name
-    puts $new_lead_surname
+  def open_lead
+    #TODO-sonia The same as in lead_settings page: Get to know how to make an element taking a variable name
     @browser.link(:class => 'lead-name', :text => $new_lead_name+' '+$new_lead_surname).click
     sleep 4
   end
@@ -58,14 +53,4 @@ require_relative '../test_data'
     wait_until{ lead_status_on_page_element.visible? }
   end
 
-  #private
-
-  #TODO-opinion I may replace this with some random data gem, but this is not crucial in this test to have a nice data
-  #TODO-opinion I should probably remove generation of data to some test-data-cration
-  def generate_random_data
-    puts ' generate random data nic nie ma'
-    #random_string = ('a'..'z').to_a.shuffle[0..3].join
-    #$new_lead_name = 'name_'+random_string
-    #$new_lead_surname = 'surname_'+random_string
-  end
 end
